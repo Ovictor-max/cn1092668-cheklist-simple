@@ -1551,7 +1551,7 @@ function toggle(id) {
 }
 
 // ── Upload documente ──────────────────────────────────────────────────────────
-const UP_URL = 'INLOCUIESTE_CU_URL_APPS_SCRIPT';
+const UP_URL = 'https://script.google.com/macros/s/AKfycbyWlqhflzGOycEzPlDZMMAA-rN3YjFL7-kbQv3pVvIGNXt0V9oIN4AIR0VOrBxSh-ktUQ/exec';
 const UP_TYPES = new Set([
   'application/pdf',
   'application/msword',
@@ -1622,7 +1622,7 @@ async function upSubmit() {
     msg.textContent = 'Completați câmpul Nume / Firma.';
     return;
   }
-  if (UP_URL === 'INLOCUIESTE_CU_URL_APPS_SCRIPT') {
+  if (UP_URL === 'https://script.google.com/macros/s/AKfycbyWlqhflzGOycEzPlDZMMAA-rN3YjFL7-kbQv3pVvIGNXt0V9oIN4AIR0VOrBxSh-ktUQ/exec') {
     msg.className = 'upload-msg err';
     msg.textContent = 'URL-ul scriptului nu a fost configurat încă.';
     return;
