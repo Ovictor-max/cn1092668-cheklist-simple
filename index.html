@@ -7,6 +7,39 @@
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f1f5f9;color:#1e293b;font-size:14px}button{font:inherit;color:inherit}.container{max-width:1160px;margin:0 auto;padding:20px}.header{background:#1f4f7a;color:white;border-radius:8px;padding:22px;margin-bottom:16px}.header h1{font-size:1.3rem;line-height:1.35;margin:8px 0}.meta{font-size:.88rem;line-height:1.6;opacity:.9}.scoring{margin-top:10px;background:rgba(255,255,255,.14);border-radius:6px;padding:10px}.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px}.card,.panel,.crit-box,.group-section{background:white;border-radius:8px;box-shadow:0 1px 3px rgba(15,23,42,.08)}.card{padding:15px}.label,.subtle{font-size:.76rem;color:#64748b;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}.value{font-size:2rem;font-weight:700}.total .value{color:#2563eb}.ok .value{color:#16a34a}.partial .value{color:#d97706}.lipsa .value{color:#dc2626}.panel{padding:16px;margin-bottom:16px}.section-bars{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}.pbar-wrap{display:flex;align-items:center;gap:8px;min-width:0}.pbar-inner{flex:1;display:flex;border-radius:6px;overflow:hidden;background:#e2e8f0;min-width:70px}.pbar-label{font-size:.78rem;color:#475569;white-space:nowrap}.crit-box{border-left:4px solid #dc2626;padding:16px;margin-bottom:16px}.crit-box h2,.section-title{font-size:1rem;margin:0 0 10px}table{width:100%;border-collapse:collapse}th{text-align:left;color:#64748b;font-size:.78rem;border-bottom:1px solid #e2e8f0;padding:7px 8px}td{padding:7px 8px;border-bottom:1px solid #f1f5f9;vertical-align:top}.group-section{margin-bottom:12px;overflow:hidden}.group-header{display:flex;align-items:center;gap:12px;background:#f8fafc;padding:12px 16px;border-bottom:1px solid #e2e8f0}.group-title{font-weight:700;min-width:220px}.owner-block{border-bottom:1px solid #f1f5f9}.owner-header{width:100%;border:0;background:white;display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;text-align:left}.owner-header:hover{background:#f8fafc}.owner-name{font-weight:600;flex:1}.owner-counts{display:flex;gap:6px;flex-wrap:wrap}.cnt,.badge,.scoring-tag{display:inline-block;border-radius:999px;font-size:.75rem;font-weight:700;padding:2px 8px}.cnt.ok,.badge.ok{background:#dcfce7;color:#15803d}.cnt.partial,.badge.partial,.scoring-tag{background:#fef3c7;color:#92400e}.cnt.lipsa,.badge.lipsa{background:#fee2e2;color:#b91c1c}.badge.pending{background:#f1f5f9;color:#64748b}.chevron{color:#64748b}.owner-table{padding:0 16px 12px}.critical-row{background:#fff7f7}.nr-cell{width:76px;color:#64748b;white-space:nowrap}.status-cell{width:96px;white-space:nowrap}.obs{font-size:.78rem;color:#64748b;margin-top:4px;line-height:1.35}.footer{text-align:center;color:#64748b;font-size:.75rem;margin:22px 0}@media(max-width:760px){.container{padding:12px}.section-bars{grid-template-columns:1fr}.group-header,.owner-header{align-items:flex-start;flex-direction:column}.group-title{min-width:0}.pbar-wrap{width:100%}}
 </style>
+<style>
+.upload-fab{position:fixed;bottom:24px;right:24px;background:#1f4f7a;color:#fff;border:none;border-radius:8px;padding:12px 20px;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.28);z-index:100;display:flex;align-items:center;gap:8px}
+.upload-fab:hover{background:#17406a}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal-overlay[hidden]{display:none}
+.modal-box{background:#fff;border-radius:10px;width:100%;max-width:520px;box-shadow:0 8px 32px rgba(0,0,0,.22);overflow:hidden}
+.modal-head{background:#1f4f7a;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.modal-head h3{margin:0;font-size:1rem;font-weight:700}
+.modal-close{background:none;border:none;color:#fff;font-size:1.4rem;cursor:pointer;line-height:1;padding:0}
+.modal-body{padding:20px}
+.field-lbl{font-size:.8rem;font-weight:600;color:#475569;margin-bottom:5px;display:block}
+.field-lbl span{color:#dc2626}
+.modal-body input[type=text]{width:100%;border:1.5px solid #e2e8f0;border-radius:6px;padding:9px 12px;font:inherit;font-size:.9rem;outline:none}
+.modal-body input[type=text]:focus{border-color:#1f4f7a}
+.dropzone{margin-top:14px;border:2px dashed #cbd5e1;border-radius:8px;padding:22px 16px;text-align:center;cursor:pointer;background:#f8fafc;transition:border-color .15s,background .15s}
+.dropzone:hover,.dropzone.dz-drag{border-color:#1f4f7a;background:#eff6ff}
+.dropzone strong{font-size:.9rem;color:#334155}
+.dropzone p{margin:5px 0 0;font-size:.78rem;color:#64748b}
+.file-list{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+.fi{display:flex;align-items:center;gap:8px;background:#f8fafc;border-radius:6px;padding:7px 10px;font-size:.82rem}
+.fi-name{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#1e293b}
+.fi-sz{color:#94a3b8;white-space:nowrap;font-size:.75rem}
+.fi-st{font-size:.75rem;font-weight:700;white-space:nowrap}
+.fi-st.ok{color:#16a34a}.fi-st.err{color:#dc2626}.fi-st.ld{color:#2563eb}
+.fi-rm{background:none;border:none;color:#cbd5e1;font-size:1rem;cursor:pointer;padding:0 2px;line-height:1}
+.fi-rm:hover{color:#dc2626}
+.btn-upload{width:100%;margin-top:14px;background:#1f4f7a;color:#fff;border:none;border-radius:6px;padding:11px;font:inherit;font-size:.9rem;font-weight:600;cursor:pointer}
+.btn-upload:hover:not(:disabled){background:#17406a}
+.btn-upload:disabled{opacity:.45;cursor:not-allowed}
+.upload-msg{margin-top:10px;font-size:.82rem;border-radius:6px;padding:8px 12px;display:none}
+.upload-msg.ok{background:#dcfce7;color:#15803d;display:block}
+.upload-msg.err{background:#fee2e2;color:#b91c1c;display:block}
+</style>
 </head>
 <body>
 <main class="container">
@@ -1480,6 +1513,34 @@ Funcția.....</div></td>
                 </div></div>
   <div class="footer">Generat la 04.06.2026 direct din 2026_06_04_Check list documente_CN1092668.xlsx</div>
 </main>
+
+<button class="upload-fab" onclick="openUpload()">&#8679; Incarca documente</button>
+
+<div class="modal-overlay" id="uploadModal" hidden onclick="if(event.target===this)closeUpload()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3>Incarca documente &mdash; CN1092668</h3>
+      <button class="modal-close" onclick="closeUpload()" title="Inchide">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label class="field-lbl" for="upName">Nume / Firma <span>*</span></label>
+      <input type="text" id="upName" placeholder="ex: SC Construcții Alfa SRL" autocomplete="organization">
+      <div class="dropzone" id="upZone"
+        onclick="document.getElementById('upInput').click()"
+        ondragover="event.preventDefault();this.classList.add('dz-drag')"
+        ondragleave="this.classList.remove('dz-drag')"
+        ondrop="event.preventDefault();this.classList.remove('dz-drag');upAddFiles(Array.from(event.dataTransfer.files))">
+        <div style="font-size:2rem;margin-bottom:4px">&#128196;</div>
+        <strong>Click sau trage fișierele aici</strong>
+        <p>PDF, DOC, DOCX, XLSX, JPEG &mdash; max 20 MB / fișier</p>
+      </div>
+      <input type="file" id="upInput" multiple accept=".pdf,.doc,.docx,.xlsx,.jpg,.jpeg" style="display:none" onchange="upAddFiles(Array.from(this.files));this.value=''">
+      <div class="file-list" id="upList"></div>
+      <button class="btn-upload" id="upBtn" onclick="upSubmit()" disabled>Incarca fisierele</button>
+      <div class="upload-msg" id="upMsg"></div>
+    </div>
+  </div>
+</div>
 <script>
 function toggle(id) {
   const table = document.getElementById('tbl_' + id);
@@ -1487,6 +1548,120 @@ function toggle(id) {
   const open = table.hasAttribute('hidden');
   table.toggleAttribute('hidden', !open);
   chev.textContent = open ? '^' : 'v';
+}
+
+// ── Upload documente ──────────────────────────────────────────────────────────
+const UP_URL = 'INLOCUIESTE_CU_URL_APPS_SCRIPT';
+const UP_TYPES = new Set([
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'image/jpeg'
+]);
+let upFiles = [];
+
+function openUpload() { document.getElementById('uploadModal').removeAttribute('hidden'); }
+function closeUpload() {
+  document.getElementById('uploadModal').setAttribute('hidden', '');
+  upFiles = []; upRender();
+  document.getElementById('upName').value = '';
+  document.getElementById('upMsg').className = 'upload-msg';
+}
+
+function upAddFiles(files) {
+  const msg = document.getElementById('upMsg');
+  msg.className = 'upload-msg';
+  files.forEach(function(f) {
+    const mime = f.type || '';
+    if (!UP_TYPES.has(mime)) {
+      msg.className = 'upload-msg err';
+      msg.textContent = '"' + f.name + '" — tip nepermis (PDF, DOC, DOCX, XLSX, JPEG).';
+      return;
+    }
+    if (f.size > 20 * 1024 * 1024) {
+      msg.className = 'upload-msg err';
+      msg.textContent = '"' + f.name + '" depășește 20 MB.';
+      return;
+    }
+    if (!upFiles.some(function(x){ return x.name === f.name && x.size === f.size; }))
+      upFiles.push(f);
+  });
+  upRender();
+}
+
+function upRemove(i) { upFiles.splice(i, 1); upRender(); }
+
+function upRender() {
+  document.getElementById('upList').innerHTML = upFiles.map(function(f, i) {
+    return '<div class="fi" id="ufi'+i+'">' +
+      '<span class="fi-name" title="'+f.name+'">'+f.name+'</span>' +
+      '<span class="fi-sz">'+(f.size/1048576).toFixed(1)+' MB</span>' +
+      '<span class="fi-st" id="ust'+i+'"></span>' +
+      '<button class="fi-rm" onclick="upRemove('+i+')">&times;</button>' +
+      '</div>';
+  }).join('');
+  document.getElementById('upBtn').disabled = upFiles.length === 0;
+}
+
+function upB64(file) {
+  return new Promise(function(res, rej) {
+    var r = new FileReader();
+    r.onload = function() { res(r.result.split(',')[1]); };
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+
+async function upSubmit() {
+  const name = document.getElementById('upName').value.trim();
+  const msg = document.getElementById('upMsg');
+  if (!name) {
+    document.getElementById('upName').focus();
+    msg.className = 'upload-msg err';
+    msg.textContent = 'Completați câmpul Nume / Firma.';
+    return;
+  }
+  if (UP_URL === 'INLOCUIESTE_CU_URL_APPS_SCRIPT') {
+    msg.className = 'upload-msg err';
+    msg.textContent = 'URL-ul scriptului nu a fost configurat încă.';
+    return;
+  }
+  const btn = document.getElementById('upBtn');
+  btn.disabled = true; btn.textContent = 'Se incarca...';
+  msg.className = 'upload-msg';
+  let ok = 0, fail = 0;
+  for (let i = 0; i < upFiles.length; i++) {
+    const f = upFiles[i];
+    const st = document.getElementById('ust' + i);
+    const rm = document.querySelector('#ufi' + i + ' .fi-rm');
+    st.className = 'fi-st ld'; st.textContent = '...';
+    if (rm) rm.style.display = 'none';
+    try {
+      const base64Data = await upB64(f);
+      const resp = await fetch(UP_URL, {
+        method: 'POST',
+        body: JSON.stringify({ uploaderName: name, fileName: f.name, mimeType: f.type, base64Data: base64Data })
+      });
+      const result = await resp.json();
+      if (result.ok) { st.className = 'fi-st ok'; st.textContent = 'OK'; ok++; }
+      else { st.className = 'fi-st err'; st.textContent = result.error || 'Eroare'; fail++; }
+    } catch(e) {
+      st.className = 'fi-st err'; st.textContent = 'Eroare conexiune'; fail++;
+    }
+  }
+  if (fail === 0) {
+    msg.className = 'upload-msg ok';
+    msg.textContent = ok + ' fișier' + (ok !== 1 ? 'e' : '') + ' încărcat' + (ok !== 1 ? 'e' : '') + ' cu succes!';
+    btn.textContent = 'Incarca fisierele';
+    upFiles = [];
+    setTimeout(upRender, 2000);
+  } else {
+    msg.className = 'upload-msg err';
+    msg.textContent = fail + ' fișier' + (fail !== 1 ? 'e' : '') + ' nu s-' + (fail !== 1 ? 'au' : 'a') + ' putut încărca.';
+    btn.textContent = 'Reincerca';
+    btn.disabled = false;
+  }
 }
 </script>
 </body>
